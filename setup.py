@@ -12,18 +12,18 @@ data_patterns = [
     'static/**.txt',
 ]
 
-setup(name='relengapi-skeleton',
+setup(name='relengapi-mozharness_archiver',
     version='0.1.0',
-    description='Skeleton of a RelengAPI project',
-    author='Skeleton Crew',
-    author_email='skeleton@mozilla.com',
-    url='https://github.com/buildbot/build-relengapi-skeleton',
+    description='returns an archive of mozharness based on a gecko rev',
+    author='Jordan Lund',
+    author_email='jlund@mozilla.com',
+    url='https://github.com/buildbot/build-relengapi-mozharness_archiver',
     entry_points={
         "relengapi.metadata": [
-            'relengapi-skeleton = relengapi.blueprints.skeleton:metadata',
+            'relengapi-mozharness_archiver = relengapi.blueprints.mozharness_archiver:metadata',
         ],
         "relengapi_blueprints": [
-            'mapper = relengapi.blueprints.skeleton:bp',
+            'mapper = relengapi.blueprints.mozharness_archiver:bp',
         ],
     },
     packages=find_packages(),
@@ -37,7 +37,7 @@ setup(name='relengapi-skeleton',
         if files
     ],
     package_data={  # NOTE: these files must *also* be specified in MANIFEST.in
-        'relengapi.blueprints.skeleton': data_patterns,
+        'relengapi.blueprints.mozharness_archiver': data_patterns,
     },
     install_requires=[
         'Flask',

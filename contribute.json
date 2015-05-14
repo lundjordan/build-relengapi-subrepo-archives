@@ -2,11 +2,11 @@
   "name": "RelengAPI Skeleton",
   "description": "Skeleton of a RelengAPI project",
   "repository": {
-    "url": "https://github.com/mozilla/build-relengapi-skeleton",
+    "url": "https://github.com/mozilla/build-relengapi-mozharness_archiver",
     "license": "MPL2"
   },
   "bugs": {
-    "list": "https://github.com/mozilla/build-relengapi-skeleton/issues",
+    "list": "https://github.com/mozilla/build-relengapi-mozharness_archiver/issues",
   },
   "urls": {
     "prod": "https://api.pub.build.mozilla.org",
