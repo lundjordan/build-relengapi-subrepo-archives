@@ -12,18 +12,18 @@ data_patterns = [
     'static/**.txt',
 ]
 
-setup(name='relengapi-mozharness_archiver',
+setup(name='relengapi-subrepo_archives',
     version='0.1.0',
     description='returns an archive of mozharness based on a gecko rev',
     author='Jordan Lund',
     author_email='jlund@mozilla.com',
-    url='https://github.com/buildbot/build-relengapi-mozharness_archiver',
+    url='https://github.com/buildbot/build-relengapi-subrepo_archives',
     entry_points={
         "relengapi.metadata": [
-            'relengapi-mozharness_archiver = relengapi.blueprints.mozharness_archiver:metadata',
+            'relengapi-subrepo_archives = relengapi.blueprints.subrepo_archives:metadata',
         ],
         "relengapi_blueprints": [
-            'mapper = relengapi.blueprints.mozharness_archiver:bp',
+            'mapper = relengapi.blueprints.subrepo_archives:bp',
         ],
     },
     packages=find_packages(),
@@ -37,7 +37,7 @@ setup(name='relengapi-mozharness_archiver',
         if files
     ],
     package_data={  # NOTE: these files must *also* be specified in MANIFEST.in
-        'relengapi.blueprints.mozharness_archiver': data_patterns,
+        'relengapi.blueprints.subrepo_archives': data_patterns,
     },
     install_requires=[
         'Flask',

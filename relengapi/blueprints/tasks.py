@@ -65,9 +65,9 @@ def create_and_upload_archive(self, branch, rev):
                               meta={'status': 'uploading archive to s3 buckets',
                                     'hgmo_url': hgmo_url})
             usw2_s3_url = upload_file_to_s3('{}-{}'.format(branch, rev), archive, 'us-west-2',
-                                            'mozharness-archiver-basic-us-west-2')
+                                            'subrepo-archives-basic-us-west-2')
             use1_s3_url = upload_file_to_s3('{}-{}'.format(branch, rev), archive, 'us-east-1',
-                                            'mozharness-archiver-basic-us-east-1')
+                                            'subrepo-archives-basic-us-east-1')
         else:
             return_status = "Could not download hg.m.o archive. Check exception logs for details."
             log.warning(return_status)

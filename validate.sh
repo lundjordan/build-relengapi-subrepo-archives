@@ -9,7 +9,7 @@
 COVERAGE_MIN=96
 
 # project name
-PROJECT=relengapi-mozharness_archiver
+PROJECT=relengapi-subrepo_archives
 
 set -e
 
@@ -177,26 +177,26 @@ if [[ "${PROJECT}" =~ relengapi-[s]keleton ]]; then
     status "testing creation of a new blueprint"
     cp -r . ${tmpbase}/bubbler
     cd ${tmpbase}/bubbler
-    find * -name '*mozharness_archiver*' | while read s; do d=$(echo $s | sed s/mozharness_archiver/bubbler/g); mv $s $d; done
-    git grep mozharness_archiver | cut -d: -f 1 | sort -u | while read s; do sed s/mozharness_archiver/bubbler/g < $s > $s~; mv $s~ $s; done
+    find * -name '*subrepo_archives*' | while read s; do d=$(echo $s | sed s/subrepo_archives/bubbler/g); mv $s $d; done
+    git grep subrepo_archives | cut -d: -f 1 | sort -u | while read s; do sed s/subrepo_archives/bubbler/g < $s > $s~; mv $s~ $s; done
     {
         virtualenv skeltest --no-site-packages &&
         skeltest/bin/pip install -e .[test] &&
         skeltest/bin/relengapi run-tests &&
         skeltest/bin/relengapi build-docs --development
-    } || not_ok "creation of a new blueprint from mozharness_archiver failed"
+    } || not_ok "creation of a new blueprint from subrepo_archives failed"
     cd ${srcdir}
     rm -rf ${tmpbase}/bubbler
 
     status "testing installs and uninstalls"
-    # this is a regression test for https://github.com/mozilla/build-relengapi-mozharness_archiver/pull/3
+    # this is a regression test for https://github.com/mozilla/build-relengapi-subrepo_archives/pull/3
     mkdir ${tmpbase}/skeltest
     cd ${tmpbase}/skeltest
     {
         virtualenv ${tmpbase}/skeltest --no-site-packages &&
         ${tmpbase}/skeltest/bin/pip install relengapi[test] &&
         ${tmpbase}/skeltest/bin/pip install ${srcdir} &&
-        ${tmpbase}/skeltest/bin/pip uninstall -y relengapi-mozharness_archiver &&
+        ${tmpbase}/skeltest/bin/pip uninstall -y relengapi-subrepo_archives &&
         ${tmpbase}/skeltest/bin/relengapi run-tests &&
         ${tmpbase}/skeltest/bin/relengapi build-docs
     } || not_ok "install/uninstall test failed"

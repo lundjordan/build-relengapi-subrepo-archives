@@ -10,7 +10,7 @@ from relengapi.blueprints.types import MozharnessArchiveTask
 from relengapi.blueprints.tasks import create_and_upload_archive
 import logging
 
-bp = Blueprint('mozharness_archiver', __name__)
+bp = Blueprint('subrepo_archives', __name__)
 log = logging.getLogger(__name__)
 
 GET_EXPIRES_IN = 300
@@ -39,7 +39,7 @@ def task_status(task_id):
 @api.apimethod(None, unicode, unicode, status_code=302)
 def get_archive(branch, rev, region='us-west-2'):
     s3 = current_app.aws.connect_to('s3', region)
-    bucket = s3.get_bucket('mozharness-archiver-{}'.format(region))
+    bucket = s3.get_bucket('subrepo-archives-{}'.format(region))
     key = '{branch}-{rev}'.format(branch=branch, rev=rev)
 
     # first, see if the key exists
@@ -48,13 +48,13 @@ def get_archive(branch, rev, region='us-west-2'):
         # since this is a long'ish request, let's acknowledge and complete it
         # asynchronously in a separate task
         task = create_and_upload_archive.apply_async(args=[branch, rev], task_id=rev)
-        return {}, 202, {'Location': url_for('mozharness_archiver.task_status', task_id=task.id)}
+        return {}, 202, {'Location': url_for('subrepo_archives.task_status', task_id=task.id)}
 
     log.info("generating GET URL to {}, expires in {}s".format(rev, GET_EXPIRES_IN))
     # return 302 pointing to s3 url with archive
     signed_url = s3.generate_url(
         method='GET', expires_in=GET_EXPIRES_IN,
-        bucket='mozharness-archiver-{}'.format(region), key=key
+        bucket='subrepo-archives-{}'.format(region), key=key
     )
     return redirect(signed_url)
 
