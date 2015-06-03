@@ -2,13 +2,16 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from flask import Blueprint, url_for, jsonify
-from relengapi.lib import api
-from flask import redirect
-from flask import current_app
-from relengapi.blueprints.types import MozharnessArchiveTask
-from relengapi.blueprints.tasks import create_and_upload_archive
 import logging
+
+from flask import Blueprint
+from flask import current_app
+from flask import jsonify
+from flask import redirect
+from flask import url_for
+from relengapi.blueprints.subrepo_archives.tasks import create_and_upload_archive
+from relengapi.blueprints.subrepo_archives.types import MozharnessArchiveTask
+from relengapi.lib import api
 
 bp = Blueprint('subrepo_archives', __name__)
 log = logging.getLogger(__name__)
@@ -36,7 +39,7 @@ def task_status(task_id):
 
 
 @bp.route('/<branch>/<rev>')
-@api.apimethod(None, unicode, unicode, status_code=302)
+@api.apimethod(None, unicode, unicode, unicode, status_code=302)
 def get_archive(branch, rev, region='us-west-2'):
     s3 = current_app.aws.connect_to('s3', region)
     bucket = s3.get_bucket('subrepo-archives-{}'.format(region))

@@ -2,10 +2,11 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import time
-from random import randint
-from functools import wraps
 import logging
+import time
+
+from functools import wraps
+from random import randint
 
 logger = logging.getLogger(__name__)
 

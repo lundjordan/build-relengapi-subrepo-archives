@@ -1,16 +1,17 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-import os
-import urllib2
-from boto.s3.key import Key
-import requests
 import logging
+import os
+import requests
+import urllib2
+
+from boto.s3.key import Key
 
 
 from flask import current_app
+from relengapi.blueprints.subrepo_archives.util import retry
 from relengapi.lib import celery
-from relengapi.blueprints.util import retry
 
 log = logging.getLogger(__name__)
 
