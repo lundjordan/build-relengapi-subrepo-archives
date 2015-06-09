@@ -20,10 +20,7 @@ class MozharnessArchiveTask(wsme.types.Base):
     #: subdir artifact url from hg.m.o based on rev
     hgmo_url = unicode
 
-    #: us-west-2 s3 url for mozharness archive
-    usw2_s3_url = unicode
-
-    #: us-east-1 s3 url for mozharness archive
-    use1_s3_url = unicode
+    #: s3 links for the archives by region
+    s3_urls = {str: str}
 
 

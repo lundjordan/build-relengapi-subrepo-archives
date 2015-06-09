@@ -12,6 +12,7 @@ test_context = TestContext()
 
 @test_context
 def test_hello(client):
+    print 'hi there'
     rv = client.get('/subrepo_archives/')
     eq_(rv.status_code, 200)
     eq_(json.loads(rv.data)['result'], {'message': 'hello world'})
